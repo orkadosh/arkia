@@ -1,0 +1,56 @@
+<!-- emission-results.component.html -->
+<!-- {{flightForm.value|json}} -->
+<button type="button" (click)="addFlight()">Add Flight</button>
+
+<form [formGroup]="flightForm" class="flightForm" (ngSubmit)="onSubmit()">
+    <div formArrayName="flights">
+      <div *ngFor="let flightGroup of flightControls; let i = index" [formGroup]="flightGroup" class="flight-group">
+        <div *ngFor="let controlName of flightGroup['controls'] | keys">
+            <label [for]="controlName">{{ controlName | titlecase }}:</label>
+            <ng-container *ngIf="controlName.includes('Date'); else textInput">
+                <!-- If the controlName includes 'Date', create an array of date inputs -->
+                <div class="date-inputs">
+                  <input type="number" [formControl]="flightGroup.get(controlName + '.year')" placeholder="Year" />
+                  <input type="number" [formControl]="flightGroup.get(controlName + '.month')" placeholder="Month" />
+                  <input type="number" [formControl]="flightGroup.get(controlName + '.day')" placeholder="Day" />
+                </div>
+              </ng-container>
+              <ng-template #textInput>
+                <!-- If not, create a regular input -->
+                <input [type]="controlName.includes('Date') ? 'text' : 'text'" [formControlName]="controlName" [name]="controlName" />
+              </ng-template>
+            <div *ngIf="flightGroup.get(controlName).hasError('required')">{{ controlName | titlecase }} is required.</div>
+          </div>
+        </div>
+    </div>
+    <button type="submit" [disabled]="flightForm.invalid">Submit</button>
+  </form>
+  
+
+<div *ngIf="!(results$ | async); else loadingTemplate">
+    <h2>Loading...</h2>
+  </div>
+  
+  <ng-template #loadingTemplate>
+    <div *ngIf="results$ | async as results">
+      <h2>Flight Emissions Results</h2>
+  
+      <div *ngFor="let flight of results.flightEmissions">
+        <div>
+          <strong>Flight Details:</strong>
+          <p>Origin: {{ flight.flight.origin }}</p>
+          <p>Destination: {{ flight.flight.destination }}</p>
+  
+          <strong>Emissions per Pax:</strong>
+          <p>First Class: {{ flight.emissionsGramsPerPax.first }}</p>
+          <p>Business Class: {{ flight.emissionsGramsPerPax.business }}</p>
+          <p>Premium Economy: {{ flight.emissionsGramsPerPax.premiumEconomy }}</p>
+          <p>Economy: {{ flight.emissionsGramsPerPax.economy }}</p>
+        </div>
+        <hr>
+      </div>
+  
+       <p><strong>Model Version:</strong> {{ results.modelVersion.major || '' }}.{{ results.modelVersion.minor || ''}}.{{ results.modelVersion.patch|| '' }}</p>
+    </div>
+  </ng-template>
+  

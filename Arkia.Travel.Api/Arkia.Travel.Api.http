@@ -1,0 +1,6 @@
+@Arkia.Travel.Api_HostAddress = http://localhost:5189
+
+GET {{Arkia.Travel.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

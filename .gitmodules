@@ -1,0 +1,3 @@
+[submodule "Arkia.Travel.Web"]
+	path = Arkia.Travel.Web
+	url = https://github.com/orkadosh/arkiaTravel.git

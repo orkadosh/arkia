@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Arkia.Travel.Api.props" />
+</Project>
