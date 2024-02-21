@@ -1,5 +1,9 @@
 // your-component.component.scss
+.emission-container{
 
+h2,h3{
+  text-align: center;
+}
 // Flex container styles for the form
 .flightForm{
     display: flex;
@@ -12,13 +16,14 @@
     // Style for each flight form group
     .flight-group {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
+      justify-content: left;
       border: 1px solid #ccc;
       padding: 15px;
       border-radius: 8px;
-  
+      gap: 1rem;
+     
       // Input styles
       input {
         width: 200px;
@@ -27,7 +32,11 @@
         border-radius: 4px;
         outline: none;
       }
-  
+      .date-inputs{
+        display: flex;
+        flex-wrap: wrap;
+        gap:10px;
+      }
       // Error message styles
       .error-message {
         color: red;
@@ -35,7 +44,12 @@
         margin-top: 5px;
       }
     }
-  
+    .actions{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
     // Button styles
     button {
       background-color: #007bff;
@@ -55,5 +69,50 @@
         cursor: not-allowed;
       }
     }
+
   }
-  
+
+  .details{
+
+  }
+
+  .emptyContent{
+    margin: 0 auto ;
+    width: 200px;
+  }
+/* flight-list.component.scss */
+
+// .card-container {
+//   display: flex;
+//   align-items: center; /* Center the cards horizontally */
+//   justify-content: center; /* Center the cards vertically */
+//   height: 100vh; /* Set the height to 100% of the viewport height */
+// }
+.card-container {
+
+}
+.mat-card {
+  max-width: 400px;
+  margin-right: 16px;
+  box-sizing: border-box;
+  margin: 1.5rem auto;
+}
+
+// .card-container .mat-card:last-child {
+//   margin-right: 0;
+// }
+
+/* Additional styles for individual cards */
+.mat-card {
+  padding: 16px;
+}
+
+.active {
+  background-color: #e0f7fa;
+}
+
+/* Additional styles for navigation buttons */
+.mat-raised-button {
+  margin-top: 16px;
+}
+}
